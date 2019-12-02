@@ -1,14 +1,13 @@
 import os
 
 dir = os.path.dirname(__file__)
-with open(os.path.join(dir,"test")) as f:
+with open(os.path.join(dir,"input")) as f:
     mem = list(map(int, f.read().strip().split(',')))
     mem[1]=12
     mem[2]=2
     pc = 0
     while pc+4<len(mem):
         operation,a,b,address = mem[pc:pc+4]
-        print([operation,a,b,address])
         result = 0
         if operation==1:
             result = mem[a]+mem[b]
