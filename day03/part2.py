@@ -18,18 +18,20 @@ with open(os.path.join(dir,"input")) as f:
         field = {}
         x = 0
         y = 0
+        d = 0
         for direction in directions:
             dx, dy = delta[direction[0]]
             steps = int(direction[1:])
             for i in range(steps):
                 x += dx
                 y += dy
-                field[(x,y)] = True
+                d += 1
+                field[(x,y)] = d
         fields.append(field)
     for (x,y) in fields[0]:
         if (x,y) in fields[1]:
-            collisions.append((x,y))
+            collisions.append(fields[0][(x,y)]+fields[1][(x,y)])
     best = sys.maxsize
     for c in collisions:
-        best = min(best,abs(c[0])+abs(c[1]))
+        best = min(best,c)
     print(best)
