@@ -7,8 +7,8 @@ with open(os.path.join(dir,"input")) as f:
     mem = list(map(int, f.read().strip().split(',')))
     lengths = [4,4,2,2]
     pc = 0
-    l = lengths[mem[pc]-1]
-    while pc+l<=len(mem):
+    while True:
+        l = lengths[mem[pc]-1]
         operation,a,b,address = mem[pc:pc+4]
         result = 0
         if operation==1:
