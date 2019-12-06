@@ -4,7 +4,7 @@ dir = os.path.dirname(__file__)
 with open(os.path.join(dir,"input")) as f:
     parents = {}
     for line in f:
-        parent,child = list(line.strip().split(')'))
+        parent,child = line.strip().split(')')
         parents[child] = parent
     sum = 0
     paths = [["YOU"],["SAN"]]
