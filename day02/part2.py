@@ -8,8 +8,10 @@ for noun in range(100):
             mem[1]=noun
             mem[2]=verb
             pc = 0
-            while pc+4<len(mem):
+            while True:
                 operation,a,b,address = mem[pc:pc+4]
+                if operation==99:
+                    break
                 result = 0
                 if operation==1:
                     result = mem[a]+mem[b]
