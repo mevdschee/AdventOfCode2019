@@ -6,8 +6,10 @@ with open(os.path.join(dir,"input")) as f:
     mem[1]=12
     mem[2]=2
     pc = 0
-    while pc+4<len(mem):
+    while True:
         operation,a,b,address = mem[pc:pc+4]
+        if operation==99:
+            exit()
         result = 0
         if operation==1:
             result = mem[a]+mem[b]
