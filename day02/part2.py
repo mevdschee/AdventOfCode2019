@@ -19,6 +19,6 @@ for noun in range(100):
                 pc+=4
             if mem[0] == 19690720:
                 print(100*noun+verb)
-                exit
+                exit()
 
 
