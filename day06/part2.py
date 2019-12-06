@@ -23,4 +23,4 @@ with open(os.path.join(dir,"input")) as f:
         if node in paths[1]:
             p1 = paths[1].index(node)
             print(p0+p1-2)
-            sys.exit()
+            exit()
