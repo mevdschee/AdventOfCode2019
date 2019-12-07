@@ -20,7 +20,7 @@ with open(os.path.join(dir, "input")) as f:
             if modes % 10 == 0:
                 params[i] = mem[params[i]]
             modes //= 10
-        jump = False
+        pc += length
         if operation == 1:
             mem[address] = params[0] + params[1]
         elif operation == 2:
@@ -32,15 +32,11 @@ with open(os.path.join(dir, "input")) as f:
         elif operation == 5:
             if params[0] != 0:
                 pc = params[1]
-                jump = True
         elif operation == 6:
             if params[0] == 0:
                 pc = params[1]
-                jump = True
         elif operation == 7:
             mem[address] = int(params[0] < params[1])
         elif operation == 8:
             mem[address] = int(params[0] == params[1])
-        if not jump:
-            pc += length
-    print(output)
+    print(output[-1])

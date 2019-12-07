@@ -20,6 +20,7 @@ with open(os.path.join(dir, "input")) as f:
             if modes % 10 == 0:
                 params[i] = mem[params[i]]
             modes //= 10
+        pc += length
         if operation == 1:
             mem[address] = params[0] + params[1]
         elif operation == 2:
@@ -28,5 +29,4 @@ with open(os.path.join(dir, "input")) as f:
             mem[address] = input.pop()
         elif operation == 4:
             output.append(params[0])
-        pc += length
-    print(output)
+    print(output[-1])
