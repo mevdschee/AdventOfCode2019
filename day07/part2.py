@@ -14,7 +14,7 @@ def load(program: str) -> dict:
 def run(state: dict, input: list) -> list:
     mem = state["mem"]
     pc = state["pc"]
-    input = list(reversed(input))
+    input.reverse()
     output = []
     lengths = [4, 4, 2, 2, 3, 3, 4, 4]
     while True:
