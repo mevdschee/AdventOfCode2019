@@ -20,7 +20,6 @@ with open(os.path.join(dir, "input")) as f:
             if modes % 10 == 0:
                 params[i] = mem[params[i]]
             modes //= 10
-        result = 0
         jump = False
         if operation == 1:
             mem[address] = params[0] + params[1]
