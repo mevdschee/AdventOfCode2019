@@ -15,11 +15,12 @@ def step(energy: int, building_list: list) -> int:
             dy = max(0, buildings[nx] - y)
             if dx + dy <= 4:
                 de = dx + max(0, dy)
-                i = building_list.index([nx,buildings[nx]])
+                i = building_list.index([nx, buildings[nx]])
                 scores.append(step(energy+de, building_list[i:]))
     if len(scores) == 0:
         return sys.maxsize
     return min(scores)
+
 
 dir = os.path.dirname(__file__)
 with open(os.path.join(dir, "input")) as f:
