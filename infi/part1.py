@@ -16,4 +16,3 @@ with open(os.path.join(dir, "input")) as f:
         y = buildings[x]
         steps += 1
     print(steps)
-    
