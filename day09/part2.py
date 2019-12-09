@@ -51,4 +51,4 @@ def run(program: str,input: list) -> list:
                 base += params[0]
     return output
 
-print(run("input",[1])[0])
+print(run("input",[2])[0])
