@@ -43,10 +43,10 @@ with open(os.path.join(dir, "input")) as f:
             best_position = (sx, sy)
             best_moves = moves
 
-    clockwise_moves = [k for k, v in sorted(best_moves.items(), key=lambda i: i[1])]
+    clockwise_moves = sorted(best_moves.items(), key=lambda i: i[1])
     sx, sy = best_position
     shot = 0
-    for dx, dy in clockwise_moves:
+    for (dx, dy), angle in clockwise_moves:
         for i in range(1, max(w, h)):
             x, y = sx + i * dx, sy + i * dy
             if x < 0 or y < 0 or x >= w or y >= h:
