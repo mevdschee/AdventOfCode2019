@@ -14,6 +14,8 @@ with open(os.path.join(dir, "input")) as f:
             if field[y][x] == "#":
                 asteroids[(x, y)] = True
     best_score = 0
+    best_position = (0, 0)
+    best_moves = {}
     for sx, sy in asteroids:
         moves = {}
         for ty in range(h):
@@ -23,7 +25,10 @@ with open(os.path.join(dir, "input")) as f:
                     gcd = math.gcd(dx, dy)
                     dx //= gcd
                     dy //= gcd
-                    moves[(dx, dy)] = True
+                    angle = math.degrees(math.atan2(dx, -dy))
+                    if angle < 0:
+                        angle += 360
+                    moves[(dx, dy)] = angle
         seen = 0
         for dx, dy in moves:
             for i in range(1, max(w, h)):
@@ -35,4 +40,20 @@ with open(os.path.join(dir, "input")) as f:
                     break
         if seen > best_score:
             best_score = seen
-    print(best_score)
+            best_position = (sx, sy)
+            best_moves = moves
+
+    clockwise_moves = [k for k, v in sorted(best_moves.items(), key=lambda i: i[1])]
+    sx, sy = best_position
+    shot = 0
+    for dx, dy in clockwise_moves:
+        for i in range(1, max(w, h)):
+            x, y = sx + i * dx, sy + i * dy
+            if x < 0 or y < 0 or x >= w or y >= h:
+                break
+            if (x, y) in asteroids:
+                shot += 1
+                if shot == 200:
+                    print(x * 100 + y)
+                    exit()
+                break
