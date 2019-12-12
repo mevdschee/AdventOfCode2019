@@ -12,13 +12,13 @@ with open(os.path.join(dir, "input")) as f:
         for m1 in moons:
             for m2 in moons:
                 if m1 != m2:
-                    for k in m1["pos"].keys():
+                    for k in keys:
                         if m1["pos"][k]<m2["pos"][k]:
                             m1["vel"][k]+=1
                         if m1["pos"][k]>m2["pos"][k]:
                             m1["vel"][k]-=1
         for m in moons:
-            for k in m1["pos"].keys():
+            for k in keys:
                 m["pos"][k]+=m["vel"][k]
         print(step+1)
         for m in moons:
