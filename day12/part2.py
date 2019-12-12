@@ -1,4 +1,5 @@
 import os
+from math import gcd
 
 dir = os.path.dirname(__file__)
 with open(os.path.join(dir, "input")) as f:
@@ -8,7 +9,13 @@ with open(os.path.join(dir, "input")) as f:
         pairs = line.strip().strip('<>').split(', ')
         moon = map(lambda s: (s.split('=')[0], int(s.split('=')[1])), pairs)
         moons.append({"pos": dict(moon), "vel": dict(zip(keys,[0,0,0]))})
-    for step in range(1000):
+    firsts = {}
+    cycles = {}
+    for k in keys:
+        firsts[k] = [m["pos"][k] for m in moons]
+    steps = 0
+    while len(cycles) < len(keys):
+        steps += 1                    
         for m1 in moons:
             for m2 in moons:
                 for k in keys:
@@ -19,9 +26,16 @@ with open(os.path.join(dir, "input")) as f:
         for m in moons:
             for k in keys:
                 m["pos"][k]+=m["vel"][k]
-    energy = 0
-    for m in moons:
-        pos = sum(map(abs, m["pos"].values())) 
-        vel = sum(map(abs, m["vel"].values()))
-        energy += pos * vel
-    print(energy)
+        for k in keys:
+            if not k in cycles:
+                vel = [m["vel"][k] for m in moons]
+                if vel == [0] * len(moons):
+                    pos = [m["pos"][k] for m in moons]
+                    if pos == firsts[k]:
+                        cycles[k] = steps
+
+a = list(cycles.values())
+lcm = a[0]
+for i in a[1:]:
+    lcm = int(lcm*i/gcd(lcm, i))
+print(lcm)
