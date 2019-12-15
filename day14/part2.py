@@ -16,7 +16,7 @@ with open(os.path.join(dir, "input")) as f:
             components[chemical][1].append((source[1], int(source[0])))
 
 
-def produce(chemical: str, quantity: int, unused: dict = {}) -> list:
+def produce(chemical: str, quantity: int, unused: dict) -> list:
     chemicals = {}
     if not chemical in components:
         return {chemical: quantity}
@@ -39,10 +39,11 @@ def produce(chemical: str, quantity: int, unused: dict = {}) -> list:
 num = 0
 val = 0
 for start in range(64):
-    val = produce('FUEL', 1 << start)['ORE']
+    val = produce('FUEL', 1 << start, {})['ORE']
     if val > 1000000000000:
-        for pos in range(start-1, 0, -1):
-            val = produce('FUEL', num | 1 << pos)['ORE']
-            if val < 1000000000000:
+        for pos in range(start-1, -1, -1):
+            val = produce('FUEL', num | 1 << pos, {})['ORE']
+            if val <= 1000000000000:
                 num |= 1 << pos
+        break
 print(num)
