@@ -9,7 +9,8 @@ with open(os.path.join(dir, "input")) as f:
     line = line[offset:]
     values = list(map(int,list(line)))
     for _ in range(100):
-        prev = 0
+        total = 0
         for i in range(len(values) - 1, -1, -1):
-            prev = values[i] = (prev + values[i])%10
+            total += values[i]
+            values[i] = total%10
     print(''.join(map(str,values[0:8])))
