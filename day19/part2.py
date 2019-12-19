@@ -86,24 +86,32 @@ while True:
         last_col+=1
     first_cols[y%100] = first_col
     last_cols[y%100] = last_col
+    y+=1
     if min(last_cols.values()) - max(first_cols.values()) >=100:
         break
-    y+=1
 
-px = min(last_cols.values())-100-1
+px = min(last_cols.values())-100
 py = y - 100
 
-# width = 200
-# height = 102
-# total = 0
-# for y in range(py-1,py+height):
-#     for x in range(px-1,px+width):
-#         state = load("input")
-#         output = run(state, [x,y], -1)[0]
-#         if output==1:
-#             print('#',end='')
-#         else:
-#             print('.',end='')
-#     print()
-
 print(px*10000+py)
+
+margin = 1
+
+px -= margin
+py -= margin
+
+width = 100
+height = 100
+total = 0
+for y in range(py,py+height+margin*2):
+    print(y,end=',(')
+    print(px,end='-')
+    print(px+width+margin*2,end='): ')
+    for x in range(px,px+width+margin*2):
+        state = load("input")
+        output = run(state, [x,y], -1)[0]
+        if output==1:
+            print('#',end='')
+        else:
+            print('.',end='')
+    print()
