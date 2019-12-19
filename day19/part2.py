@@ -97,18 +97,14 @@ py = y - size
 print(px*10000+py)
 
 # margin = 1
-
-# px -= margin
-# py -= margin
-
 # width = size
 # height = size
 # total = 0
-# for y in range(py,py+height+margin*2):
+# for y in range(py-margin,py-margin+height+margin*2):
 #     print(y,end=',(')
-#     print(px,end='-')
-#     print(px+width+margin*2-1,end='): ')
-#     for x in range(px,px+width+margin*2):
+#     print(px-margin,end='-')
+#     print(px-margin+width+margin*2-1,end='): ')
+#     for x in range(px-margin,px-margin+width+margin*2):
 #         state = load("input")
 #         output = run(state, [x,y], -1)[0]
 #         if output==1:
