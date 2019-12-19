@@ -74,7 +74,7 @@ first_col = 3
 last_col = 4
 first_cols = {}
 last_cols = {}
-size = 2
+size = 100
 y = 5
 while True:
     state = load("input")
@@ -96,7 +96,7 @@ py = y - size
 
 print(px*10000+py)
 
-margin = 5
+margin = 1
 
 px -= margin
 py -= margin
