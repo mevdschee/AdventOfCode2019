@@ -96,23 +96,23 @@ py = y - size
 
 print(px*10000+py)
 
-margin = 1
+# margin = 1
 
-px -= margin
-py -= margin
+# px -= margin
+# py -= margin
 
-width = size
-height = size
-total = 0
-for y in range(py,py+height+margin*2):
-    print(y,end=',(')
-    print(px,end='-')
-    print(px+width+margin*2-1,end='): ')
-    for x in range(px,px+width+margin*2):
-        state = load("input")
-        output = run(state, [x,y], -1)[0]
-        if output==1:
-            print('#',end='')
-        else:
-            print('.',end='')
-    print()
+# width = size
+# height = size
+# total = 0
+# for y in range(py,py+height+margin*2):
+#     print(y,end=',(')
+#     print(px,end='-')
+#     print(px+width+margin*2-1,end='): ')
+#     for x in range(px,px+width+margin*2):
+#         state = load("input")
+#         output = run(state, [x,y], -1)[0]
+#         if output==1:
+#             print('#',end='')
+#         else:
+#             print('.',end='')
+#     print()
