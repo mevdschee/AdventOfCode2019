@@ -1,4 +1,5 @@
 import os
+import re
 
 
 def load(program: str) -> dict:
@@ -72,28 +73,70 @@ def run(state: dict, input: list, read: int) -> list:
 
 state = load("input")
 output = run(state, [], -1)
-lines = ''.join(map(chr,output)).strip().splitlines()
+lines = ''.join(map(chr, output)).strip().splitlines()
 width = len(lines[0])
 height = len(lines)
 field = {}
+start = (0, 0)
 for y in range(height):
-    print(lines[y])
     for x in range(width):
-        field[(x,y)] = lines[y][x]
+        if lines[y][x] == '^':
+            start = (x, y)
+        field[(x, y)] = lines[y][x]
 
 directions = {"north": (0, -1), "south": (0, 1),
               "west": (-1, 0), "east": (1, 0)}
-total = 0
-for x in range(1,width-1):
-    for y in range(1,height-1):
-        if field[(x,y)]!='#':
+turns = ["north", "west", "south", "east"]
+direction = "north"
+visited = {}
+path = []
+x, y = start
+while True:
+    length = 0
+    for d in directions:
+        dx, dy = directions[d]
+        nx, ny = x + dx, y + dy
+        if (nx, ny) in visited:
             continue
-        paths = 0
-        for d in directions:
-            dx, dy = directions[d]
-            nx, ny = x + dx, y + dy
-            if field[(nx,ny)]!='.':
-                paths += 1
-        if paths >=3:
-            total += x * y
-print(total)
+        if (nx, ny) in field and field[(nx, ny)] == '#':
+            if turns[turns.index(direction)-len(turns)+1]==d:
+                turn = 'L'
+            if turns[turns.index(direction)-1]==d:
+                turn = 'R'
+            direction = d
+            break
+    while True:
+        dx, dy = directions[direction]
+        nx, ny = x + dx, y + dy
+        if (nx, ny) in field and field[(nx, ny)] == '#':
+            x, y = nx, ny
+            visited[(x, y)] = True
+            length += 1
+        else:
+            break
+    if length==0:
+        break
+    path += (turn,length)
+
+path_str = ','.join(list(map(str,path)))
+
+def find_programs(path_str: str, programs: str="", slot:int=0)-> list:
+    if slot == 3:
+        if len(path_str)>20:
+            return []
+        for program in programs.split("\n"):
+            if len(program)>20:
+                return []
+        return [path_str+"\n"+programs]
+    results = []
+    for l in range(1,4):
+        program = re.findall('([LR],[0-9]+(,[LR],[0-9]+){'+str(l)+'})', path_str)[0][0]
+        results += find_programs(path_str.replace(program, chr(ord("A")+slot)),programs+program+"\n",slot+1)
+    return results
+
+path_str = find_programs(path_str)[0]
+state = load("input")
+input = list(map(ord,list(path_str+"n\n")))
+state["mem"][0]=2
+output = run(state, input, -1)
+print(output[-1])
