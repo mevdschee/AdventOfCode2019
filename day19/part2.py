@@ -74,6 +74,7 @@ first_col = 3
 last_col = 4
 first_cols = {}
 last_cols = {}
+size = 2
 y = 5
 while True:
     state = load("input")
@@ -84,29 +85,29 @@ while True:
     output = run(state, [last_col,y], -1)[0]
     if output==1:
         last_col+=1
-    first_cols[y%100] = first_col
-    last_cols[y%100] = last_col
+    first_cols[y%size] = first_col
+    last_cols[y%size] = last_col
     y+=1
-    if min(last_cols.values()) - max(first_cols.values()) >=100:
+    if min(last_cols.values()) - max(first_cols.values()) >=size:
         break
 
-px = min(last_cols.values())-100
-py = y - 100
+px = min(last_cols.values())-size
+py = y - size
 
 print(px*10000+py)
 
-margin = 1
+margin = 5
 
 px -= margin
 py -= margin
 
-width = 100
-height = 100
+width = size
+height = size
 total = 0
 for y in range(py,py+height+margin*2):
     print(y,end=',(')
     print(px,end='-')
-    print(px+width+margin*2,end='): ')
+    print(px+width+margin*2-1,end='): ')
     for x in range(px,px+width+margin*2):
         state = load("input")
         output = run(state, [x,y], -1)[0]
