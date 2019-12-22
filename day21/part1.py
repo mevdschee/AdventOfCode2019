@@ -71,7 +71,9 @@ def run(state: dict, input: list, read: int) -> list:
     state["base"] = base
     return output
 
-inputs = list(map(ord,list("\n".join(["NOT C J","AND D J","NOT A T","OR T J","WALK"])+"\n")))
+instructions = ["NOT C J","AND D J","NOT A T","OR T J","WALK"]
+
+inputs = list(map(ord,list("\n".join(instructions)+"\n")))
 state = load("input")
 output = run(state, inputs, -1)
 if output[-1]>255:
