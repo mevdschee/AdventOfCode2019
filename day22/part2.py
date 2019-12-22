@@ -19,7 +19,7 @@ with open(os.path.join(dir, "test4")) as f:
         mul %= deck
         add %= deck
     for pos in range(deck):
-        print((pos*mul+add)%deck, end=' ')
+        print((pos*mul+add) % deck, end=' ')
     print()
 
     # Cant solve this.. :-(
