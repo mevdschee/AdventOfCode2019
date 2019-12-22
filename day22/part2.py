@@ -8,14 +8,14 @@ with open(os.path.join(dir, "test4")) as f:
     mul = 1
     add = 0
     for line in lines:
-        parts = line.rsplit(' ', 1)
-        if parts[0] == "deal into new":
+        text, number = line.rsplit(' ', 1)
+        if text == "deal into new":
             mul *= -1
             add += mul
-        if parts[0] == "cut":
-            add += int(parts[1]) * mul
-        if parts[0] == "deal with increment":
-            mul *= int(parts[1])**(deck-3)
+        if text == "cut":
+            add += int(number) * mul
+        if text == "deal with increment":
+            mul *= int(number)**(deck-3)
         mul %= deck
         add %= deck
     for pos in range(deck):
