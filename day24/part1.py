@@ -31,6 +31,7 @@ with open(os.path.join(dir, "input")) as f:
                         char='#'
                 new_lines[y] += char
         lines = new_lines
+    
     result = 0
     for y in range(height):
         for x in range(width):
