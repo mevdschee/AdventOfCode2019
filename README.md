@@ -6,6 +6,7 @@ See: http://adventofcode.com/2019/
 
 ## Other years
 
+- Advent of Code 2022 puzzle solutions in VB.net [(repo)](https://github.com/mevdschee/AdventOfCode2022)
 - Advent of Code 2021 puzzle solutions in C# [(repo)](https://github.com/mevdschee/AdventOfCode2021)
 - Advent of Code 2020 puzzle solutions in Rust [(repo)](https://github.com/mevdschee/AdventOfCode2020)
 - Advent of Code 2019 puzzle solutions in Python [(repo)](https://github.com/mevdschee/AdventOfCode2019)
